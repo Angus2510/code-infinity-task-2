@@ -88,7 +88,13 @@ function generateRandomData(variations) {
     const age = calculateAge(dob);
     const initials = name.charAt(0);
 
-    const row = { name, surname, initials, age, dob: dob.toLocaleDateString() };
+    const row = {
+      name,
+      surname,
+      initials,
+      age,
+      dob: dob.toLocaleDateString("en-GB"),
+    };
 
     const rowString = JSON.stringify(row);
     if (!uniqueSet.has(rowString)) {
