@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
-var cors = require("cors");
+const cors = require("cors");
+const csv = require("csv-express");
 
 const app = express();
 const port = 3000;
@@ -23,7 +24,7 @@ const names = [
   "Kate",
   "Lindi",
   "Lynn",
-  "fraser",
+  "Fraser",
   "Andrew",
   "Kyle",
   "Dom",
@@ -110,8 +111,8 @@ function createCSVFile(variations) {
   const data = generateRandomData(variations);
   const headers = Object.keys(data[0]);
 
-  const csvContent = `${headers.join(",")}\n${data
-    .map((row) => Object.values(row).join(","))
+  const csvContent = `${headers.map((value) => `"${value}"`).join(",")}\n${data
+    .map((row) => headers.map((key) => `"${row[key]}"`).join(","))
     .join("\n")}`;
 
   const outputPath = "output/output.csv";

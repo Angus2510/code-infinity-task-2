@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import classes from "./CsvGenerator.module.css";
 
 const CsvGenerator = () => {
   const [numPeople, setNumPeople] = useState("");
@@ -24,11 +25,14 @@ const CsvGenerator = () => {
   };
 
   return (
-    <div>
-      <h1>CSV Generator</h1>
-      <form id="csvForm">
-        <label htmlFor="numPeople">Number of People to Generate:</label>
+    <div className={classes.container}>
+      <h1 className={classes.header}>CSV Generator</h1>
+      <form className={classes.form} id="csvForm">
+        <label className={classes.label} htmlFor="numPeople">
+          Number of People to Generate:
+        </label>
         <input
+          className={classes.input}
           type="number"
           id="numPeople"
           name="numPeople"
@@ -37,7 +41,7 @@ const CsvGenerator = () => {
           onChange={(e) => setNumPeople(e.target.value)}
           required
         />
-        <button type="button" onClick={generateCSV}>
+        <button className={classes.btn} type="button" onClick={generateCSV}>
           Generate CSV
         </button>
       </form>
