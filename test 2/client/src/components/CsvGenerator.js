@@ -5,7 +5,7 @@ const CsvGenerator = () => {
   const [numPeople, setNumPeople] = useState("");
 
   const generateCSV = () => {
-    // Send the data to the backend using Fetch API
+    // Send the data to the backend to generate CSV
     fetch("http://localhost:3000/generate-csv", {
       method: "POST",
       headers: {
@@ -21,6 +21,22 @@ const CsvGenerator = () => {
       .catch((error) => {
         console.error("Error:", error);
         alert("Failed to generate CSV.");
+      });
+  };
+
+  const sendCSVToDatabase = () => {
+    // Send the CSV data to the backend to insert into the database
+    fetch("http://localhost:3000/send-csv-to-database", {
+      method: "POST",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        alert("CSV data sent to the database successfully!");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Failed to send CSV data to the database.");
       });
   };
 
@@ -43,6 +59,14 @@ const CsvGenerator = () => {
         />
         <button className={classes.btn} type="button" onClick={generateCSV}>
           Generate CSV
+        </button>
+        {/* Button for sending CSV data to the database */}
+        <button
+          className={classes.btn}
+          type="button"
+          onClick={sendCSVToDatabase}
+        >
+          Send CSV Data to Database
         </button>
       </form>
     </div>
